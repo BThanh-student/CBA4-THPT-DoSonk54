@@ -1,0 +1,91 @@
+.banner {
+    background: linear-gradient(135deg, #c62828, #fbc02d);
+}
+
+#top-bar {
+    background: #c62828;
+    border-top: 4px solid #fbc02d;
+    border-bottom: 4px solid #fbc02d;
+}
+.menu {
+    border-bottom: 3px solid #fbc02d;
+}
+
+.menu a:hover {
+    color: #c62828;
+}
+h3::before {
+    content: "🌸 ";
+}
+
+.section-title::after {
+    content: " 🧧";
+}
+.member-card {
+    transition: 0.3s;
+}
+
+.member-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(198, 40, 40, 0.4);
+}
+footer {
+    background: #c62828;
+    color:#f7f7f7;
+}
+footer .so-gd {
+    color: #fff;
+    opacity: 0.9;
+}
+
+footer .ten-truong {
+    color: #ffeb3b; /* vàng */
+}
+
+
+footer a {
+    color: #f7f7f7;
+}
+
+footer a:hover {
+    text-decoration: underline;
+}
+body::before {
+    content: "🧧";
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 48px;
+    z-index: 999;
+}
+
+body::after {
+    content: "🌸";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 48px;
+    z-index: 999;
+}
+body::before {
+    content: "🧧";
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    font-size: 48px;
+    z-index: 999;
+}
+
+body::after {
+    content: "🌸";
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    font-size: 48px;
+    z-index: 999;
+}
+body {
+    background-color: #fff3e0;
+    color: #4e342e;
+    font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+}
