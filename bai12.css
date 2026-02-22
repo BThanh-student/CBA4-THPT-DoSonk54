@@ -678,6 +678,155 @@ article, section {
     outline: none;
     transition: 0.3s;
 }
+/* Container lưới cho các bài viết */
+.art-grid {
+    display: grid;
+    /* Tự động chia cột: tối thiểu 250px, tối đa là 1 phần đều nhau */
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 25px; /* Khoảng cách giữa các "món hàng" */
+    padding: 10px 0;
+}
+/* Hiệu ứng bóng đổ tầng (Layered Shadows) cho thẻ bài viết */
+.art-card {
+    background: #ffffff;
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%; /* Đảm bảo các thẻ cao bằng nhau */
+}
+
+/* Hiệu ứng Zoom ảnh khi hover */
+.art-img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden; /* Cắt phần ảnh thừa khi zoom */
+    position: relative;
+}
+
+.art-card:hover .art-img img {
+    transform: scale(1.1); /* Ảnh to lên nhẹ nhàng */
+}
+
+.art-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* Badge "Nổi bật" hoặc "Mới" như web doanh nghiệp */
+.art-tag.hot {
+    background: linear-gradient(45deg, #ff4757, #ff6b81);
+    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+}
+
+/* Nút bấm Đọc tiếp - Phong cách Sapo/Shopify */
+.view-btn {
+    margin-top: auto; /* Đẩy nút xuống đáy thẻ */
+    background: transparent;
+    border: 2px solid #72C1D9;
+    color: #72C1D9;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background: #72C1D9;
+    color: white;
+    box-shadow: 0 5px 15px rgba(114, 193, 217, 0.4);
+}
+
+/* Thẻ bài viết kiểu thẻ sản phẩm */
+.art-card {
+    background: #fff;
+    border-radius: 15px;
+    border: 1px solid #f0f0f0;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.art-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    border-color: #72C1D9; /* Màu xanh banner của bro */
+}
+
+/* Ảnh tác phẩm */
+.art-img {
+    position: relative;
+    height: 180px;
+    background: #eee;
+}
+
+.art-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Nhãn tag (Thơ/Họa) */
+.art-tag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(114, 193, 217, 0.9);
+    color: white;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* Thông tin chi tiết */
+.art-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.art-info h4 {
+    margin: 0 0 5px;
+    color: #333;
+    font-size: 18px;
+}
+
+.art-info .author {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 10px;
+    font-style: italic;
+}
+
+/* Giả lập giá tiền cho vui */
+.art-price {
+    color: #ff4757;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+/* Nút bấm kiểu Web doanh nghiệp */
+.view-btn {
+    width: 100%;
+    padding: 8px 0;
+    background: #fff;
+    border: 1px solid #2ecc71; /* Màu xanh lá như ảnh bro gửi */
+    color: #2ecc71;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.view-btn:hover {
+    background: #2ecc71;
+    color: #fff;
+}
 
 #binh-luan textarea:focus {
     border-color: #72C1D9;
