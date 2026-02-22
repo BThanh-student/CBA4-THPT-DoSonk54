@@ -199,6 +199,53 @@ article, section {
     opacity: 1;
     transform: translateY(0);
 }
+/* Nới rộng box profile */
+.profile-box.info-expanded {
+    width: 700px; /* Tăng chiều rộng */
+    max-width: 90vw;
+    display: flex; /* Dàn hàng ngang */
+    flex-direction: row;
+    align-items: stretch;
+    padding: 30px;
+    gap: 20px;
+}
+
+/* Chia tỷ lệ 2 bên */
+.profile-left {
+    flex: 1;
+    text-align: center;
+    border-right: 1px solid #eee;
+    padding-right: 20px;
+}
+
+.profile-right {
+    flex: 1.5; /* Cột phải rộng hơn chút để viết chữ */
+    text-align: left;
+    padding-left: 10px;
+    overflow-y: auto; /* Nếu viết dài quá thì có thanh cuộn */
+}
+
+/* Chỉnh lại ảnh trong box cho cân đối */
+.profile-left img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+/* Responsive cho điện thoại (quay về dạng dọc) */
+@media (max-width: 600px) {
+    .profile-box.info-expanded {
+        flex-direction: column;
+        width: 320px;
+    }
+    .profile-left {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 15px;
+    }
+}
 
 #binh-luan textarea {
     width: 100%;
@@ -215,6 +262,95 @@ article, section {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.main-content {
+    max-width: 1000px;
+    margin: 0 0 0 40px;   /* trên | phải | dưới | trái */
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    flex:3;
+    position: relative; /* CHUẨN BỊ CHO ICON */
+}
+
+.main-content::before {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: -15px;
+    width: 6px;
+    height: calc(100% - 50px);
+    background: linear-gradient(to bottom, #4facfe, #00f2fe);
+    border-radius: 10px;
+}
+
+.main-content::after {
+    content: "🎓";
+    position: absolute;
+    top: 15px;
+    left: -35px;
+    font-size: 26px;
+    background: white;
+    padding: 6px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+.profile-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.profile-modal.active {
+    display: flex;
+}
+
+.sidebar {
+    flex: 1.2;
+    max-width: 380px;
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    position: sticky;
+    top: 20px; /* cuộn theo trang */
+}
+
+.sidebar h4 {
+    margin-top: 0;
+    color: #2f3542;
+}
+
+.sidebar ul {
+    padding-left: 20px;
+}
+
+.sidebar li {
+    margin: 10px 0;
+    font-size: 15px;
+}
+
+.sidebar .picture {
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.sidebar .picture img {
+    transition: transform 0.4s ease;
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+}
+
+.sidebar .picture img:hover {
+    transform: scale(1.05);
 }
 
 /* Khung ảnh tròn */
@@ -265,89 +401,12 @@ article, section {
     border-color: #0056b3; /* Đổi màu viền khi di chuột vào card */
     transform: scale(1.1) rotate(5deg); /* Phóng to nhẹ và hơi xoay cho ngầu */
 }
-
-.main-content {
-    max-width: 1000px;
-    margin: 0 0 0 40px;   /* trên | phải | dưới | trái */
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    flex:3;
-    position: relative; /* CHUẨN BỊ CHO ICON */
-}
-
-.main-content::before {
-    content: "";
-    position: absolute;
-    top: 25px;
-    left: -15px;
-    width: 6px;
-    height: calc(100% - 50px);
-    background: linear-gradient(to bottom, #4facfe, #00f2fe);
-    border-radius: 10px;
-}
-
-.main-content::after {
-    content: "🎓";
-    position: absolute;
-    top: 15px;
-    left: -35px;
-    font-size: 26px;
-    background: white;
-    padding: 6px;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}
-
-.layout {
-    display: flex;
-    gap: 40px;
-    max-width: 1400px;
-    margin: 30px auto;
-    align-items: flex-start;
-    padding:0 40px;
-}
-
-.sidebar {
-    flex: 1.2;
-    max-width: 380px;
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-    position: sticky;
-    top: 20px; /* cuộn theo trang */
-}
-
-.sidebar h4 {
-    margin-top: 0;
-    color: #2f3542;
-}
-
-.sidebar ul {
-    padding-left: 20px;
-}
-
-.sidebar li {
-    margin: 10px 0;
-    font-size: 15px;
-}
-
-.sidebar .picture {
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.sidebar .picture img {
-    transition: transform 0.4s ease;
-    width: 100%;
-    height: auto;
-    display: block;
-    border-radius: 12px;
-}
-
-.sidebar .picture img:hover {
-    transform: scale(1.05);
+.member-card {
+    display: block; /* Ép thẻ a chiếm toàn bộ diện tích của card */
+    text-decoration: none;
+    cursor: pointer; /* Hiện bàn tay khi di chuột vào */
+    position: relative;
+    z-index: 5; /* Đảm bảo nó nằm trên các lớp nền */
 }
 
 .member-img-wrapper {
@@ -365,6 +424,11 @@ article, section {
     border: 3px solid #ff4b2b;
     margin: 0 auto 15px;
     transition: all 0.4s ease;
+}
+.member-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
 }
 
 .member-img-wrapper img {
@@ -406,66 +470,95 @@ article, section {
 .member-card:hover .member-img-wrapper::after {
     border-color: #ff4757;
 }
-/* --- PHẦN FIX DẤU X VÀ MODAL THÀNH VIÊN --- */
+/* --- TỐI ƯU LAYOUT CHÍNH --- */
+.layout {
+    display: flex;
+    gap: 30px; /* Khoảng cách giữa Nội dung và Sidebar */
+    max-width: 1300px;
+    margin: 30px auto;
+    padding: 0 20px;
+    align-items: flex-start;
+}
 
-/* 1. Ẩn toàn bộ Modal và nội dung bên trong (bao gồm dấu X) */
-.profile-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: none; /* QUAN TRỌNG: Ẩn tiệt nọc khi chưa dùng */
-    z-index: 10000;
+.main-content {
+    flex: 3; /* Chiếm 3 phần */
+    min-width: 0; /* Tránh vỡ layout khi nội dung quá rộng */
+}
+
+.sidebar {
+    flex: 1; /* Chiếm 1 phần */
+    position: sticky;
+    top: 20px;
+}
+
+/* --- NÂNG CẤP PROFILE MODAL (2 CỘT CHUẨN) --- */
+.profile-modal:target {
+    display: flex !important; /* Hiện modal khi click */
+}
+
+.profile-box.info-expanded {
+    width: 850px; 
+    max-width: 95vw;
+    height: auto;
+    max-height: 90vh;
+    display: flex; 
+    flex-direction: row; /* Chia 2 cột */
+    padding: 0; 
+    border-radius: 20px;
+    background: #fff;
+    overflow: hidden; /* Quan trọng để bo góc ảnh */
+}
+
+.profile-left {
+    flex: 1;
+    background: #f8f9fa;
+    padding: 40px 20px;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    pointer-events: none; /* Tránh cản trở click khi đang ẩn */
 }
 
-/* 2. Chỉ hiện Modal khi được kích hoạt qua ID (Ví dụ: #profile-minh) */
-.profile-modal:target {
-    display: flex;
-    pointer-events: auto;
-}
-
-/* 3. Lớp nền mờ phía sau */
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.7);
-    cursor: default;
-}
-
-/* Hộp chứa thông tin thành viên (Modal Box) */
-.profile-box {
-    background: white;
-    width: 90%;
-    max-width: 400px;
-    border-radius: 20px; /* Bo góc cực mạnh */
-    text-align: center;
-    position: relative;
-    z-index: 10001;
-    overflow: hidden;    /* CỰC QUAN TRỌNG: Để ảnh bên trong phải bo theo góc 20px của hộp */
-    padding: 0;          /* Xóa padding để ảnh tràn sát mép trên */
-    animation: zoomIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-}
-
-.profile-box img {
-    width: 100%;
-    height: auto;
-    display: block;      /* Xóa khoảng hở tí hon ở dưới chân ảnh */
+.profile-left img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     object-fit: cover;
 }
 
-/* Chỉnh lại chữ bên dưới vì không còn padding ở hộp */
-.profile-box h3 {
-    margin-top: 15px;
-    color: #2f3542;
+.profile-right {
+    flex: 1.5;
+    padding: 40px;
+    text-align: left;
+    overflow-y: auto;
 }
 
-.profile-box p {
-    padding-bottom: 20px;
-    color: #57606f;
+/* Nút X màu trắng nổi bật trên ảnh */
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: #333 !important;
+    font-size: 30px;
+    z-index: 100;
+}
+
+/* Mobile Responsive cho Modal */
+@media (max-width: 768px) {
+    .profile-box.info-expanded {
+        flex-direction: column; /* Chuyển thành hàng dọc trên điện thoại */
+    }
+    .profile-left {
+        border-right: none;
+        border-bottom: 1px solid #eee;
+        padding: 20px;
+    }
+    .profile-right {
+        padding: 20px;
+    }
 }
 /* Nút X (Dấu Close) trong Modal */
 .close {
