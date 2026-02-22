@@ -26,3 +26,40 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 });
+document.addEventListener("DOMContentLoaded", function () {
+
+    const cards = document.querySelectorAll(".member-card");
+    const modals = document.querySelectorAll(".profile-modal");
+
+    // Khi click vào card
+    cards.forEach(card => {
+        card.addEventListener("click", function (e) {
+            e.preventDefault(); // chặn nhảy #id
+
+            const targetId = this.getAttribute("href").replace("#", "");
+            const modal = document.getElementById(targetId);
+
+            if (modal) {
+                modal.classList.add("active");
+            }
+        });
+    });
+
+    // Đóng modal
+    modals.forEach(modal => {
+
+        const closeBtn = modal.querySelector(".close");
+        const overlay = modal.querySelector(".overlay");
+
+        closeBtn.addEventListener("click", function (e) {
+            e.preventDefault();
+            modal.classList.remove("active");
+        });
+
+        overlay.addEventListener("click", function () {
+            modal.classList.remove("active");
+        });
+
+    });
+
+});
