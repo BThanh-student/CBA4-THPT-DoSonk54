@@ -1,3 +1,5 @@
+/* written by Chat GPT and Gemini */
+
 /* 1. Tổng thể: Ép chiều rộng lại cho cân đối */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -353,16 +355,52 @@ article, section {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    overflow: hidden;
+    
+    /* FIX CHÍNH Ở ĐÂY: */
+    padding: 0;             /* Xóa padding để ảnh khít viền */
+    overflow: hidden;       /* Cắt phần ảnh thừa */
+    isolation: isolate;     /* Giúp Safari bo góc chuẩn hơn */
+    display: block;         /* Khử khoảng hở văn bản */
+    
+    border: 3px solid #ff4b2b;
+    margin: 0 auto 15px;
+    transition: all 0.4s ease;
 }
 
-.member-img-wrapper::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    border: 3px solid #f0f0f0;
-    pointer-events: none;
+.member-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;         /* Đảm bảo không có khoảng trống dưới đáy */
+}
+.profile-box {
+    background: white;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 20px;    /* Bo góc cho cả hộp */
+    text-align: center;
+    position: relative;
+    z-index: 10001;
+    
+    /* FIX CHÍNH Ở ĐÂY: */
+    overflow: hidden;       /* Ép ảnh bên trong phải bo theo góc 20px này */
+    padding: 0;             /* Xóa padding để ảnh tràn sát mép trên */
+    
+    animation: zoomIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.profile-box img {
+    width: 100%;
+    height: auto;
+    display: block;         /* Khử viền trắng dưới chân ảnh */
+    object-fit: cover;
+}
+
+/* Tạo lại khoảng cách cho chữ vì mình đã xóa padding ở trên */
+.profile-box h3, 
+.profile-box p {
+    padding: 10px 20px;
+    margin: 5px 0;
 }
 
 .member-card:hover .member-img-wrapper::after {
@@ -398,30 +436,55 @@ article, section {
     cursor: default;
 }
 
-/* 4. Hộp chứa thông tin (Cái bảng trắng) */
+/* Hộp chứa thông tin thành viên (Modal Box) */
 .profile-box {
     background: white;
     width: 90%;
     max-width: 400px;
-    padding: 40px 20px;
-    border-radius: 20px;
+    border-radius: 20px; /* Bo góc cực mạnh */
     text-align: center;
-    position: relative; /* Để làm mốc cho nút Close */
+    position: relative;
     z-index: 10001;
+    overflow: hidden;    /* CỰC QUAN TRỌNG: Để ảnh bên trong phải bo theo góc 20px của hộp */
+    padding: 0;          /* Xóa padding để ảnh tràn sát mép trên */
     animation: zoomIn 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
-/* 5. NÚT CLOSE (DẤU X) - KHÔNG CÒN VÔ DUYÊN NỮA */
+.profile-box img {
+    width: 100%;
+    height: auto;
+    display: block;      /* Xóa khoảng hở tí hon ở dưới chân ảnh */
+    object-fit: cover;
+}
+
+/* Chỉnh lại chữ bên dưới vì không còn padding ở hộp */
+.profile-box h3 {
+    margin-top: 15px;
+    color: #2f3542;
+}
+
+.profile-box p {
+    padding-bottom: 20px;
+    color: #57606f;
+}
+/* Nút X (Dấu Close) trong Modal */
 .close {
     position: absolute;
-    top: 15px;
-    right: 20px;
+    top: 10px;    /* Chỉnh lại vị trí để không bị sát mép quá */
+    right: 15px;
     font-size: 28px;
     text-decoration: none !important;
-    color: #333 !important; /* Màu đen xám */
+    color: #ffffff !important; /* Đổi sang màu trắng để nổi bật trên nền ảnh */
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8); /* Thêm bóng đổ để bất chấp mọi màu ảnh */
     line-height: 1;
     transition: 0.3s;
     display: block;
+    z-index: 10002; /* Đảm bảo luôn nằm trên cùng của ảnh */
+}
+
+.close:hover {
+    color: #ff4757 !important; /* Di chuột vào đổi sang màu đỏ rực */
+    transform: scale(1.2) rotate(90deg);
 }
 
 .close:hover {
