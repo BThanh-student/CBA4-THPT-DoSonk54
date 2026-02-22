@@ -490,25 +490,21 @@ article, section {
 .member-card:hover .member-img-wrapper::after {
     border-color: #ff4757;
 }
-/* --- TỐI ƯU LAYOUT CHÍNH --- */
+/* Phải có class bao quanh cả Main và Sidebar (ví dụ: .layout) */
 .layout {
     display: flex;
-    gap: 30px; /* Khoảng cách giữa Nội dung và Sidebar */
-    max-width: 1300px;
-    margin: 30px auto;
-    padding: 0 20px;
-    align-items: flex-start;
+    align-items: flex-start; /* Giúp sidebar không bị kéo dài bất thường */
+    gap: 20px;
 }
-
-.main-content {
-    flex: 3; /* Chiếm 3 phần */
-    min-width: 0; /* Tránh vỡ layout khi nội dung quá rộng */
-}
-
-.sidebar {
-    flex: 1; /* Chiếm 1 phần */
-    position: sticky;
-    top: 20px;
+.main-content { flex: 3; } /* Chiếm 75% chiều rộng */
+.sidebar { flex: 1; }      /* Chiếm 25% chiều rộng */
+/* Đảm bảo cái ảnh trong Sidebar không "phình" ra ngoài */
+.sidebar .picture img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    display: block;
+    margin-top: 15px;
 }
 
 /* --- NÂNG CẤP PROFILE MODAL (2 CỘT CHUẨN) --- */
@@ -678,156 +674,141 @@ article, section {
     outline: none;
     transition: 0.3s;
 }
-/* Container lưới cho các bài viết */
+/* --- 1. LƯỚI BÀI VIẾT (GRID) --- */
 .art-grid {
     display: grid;
-    /* Tự động chia cột: tối thiểu 250px, tối đa là 1 phần đều nhau */
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
-    gap: 25px; /* Khoảng cách giữa các "món hàng" */
-    padding: 10px 0;
+    /* Chia 3 cột đều nhau */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px;
+    padding: 15px 0;
+    width: 100%;
 }
-/* Hiệu ứng bóng đổ tầng (Layered Shadows) cho thẻ bài viết */
+
+/* --- 2. THẺ BÀI VIẾT (ART CARD) --- */
+/* --- THẺ BÀI VIẾT DẠNG NGANG --- */
 .art-card {
-    background: #ffffff;
+    display: flex; 
+    flex-direction: row; /* Chuyển thành hàng ngang thay vì cột đứng */
+    align-items: flex-start; 
+    background: #fff;
     border-radius: 16px;
-    border: 1px solid rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    height: 100%; /* Đảm bảo các thẻ cao bằng nhau */
-}
-
-/* Hiệu ứng Zoom ảnh khi hover */
-.art-img {
-    width: 100%;
-    height: 200px;
-    overflow: hidden; /* Cắt phần ảnh thừa khi zoom */
-    position: relative;
-}
-
-.art-card:hover .art-img img {
-    transform: scale(1.1); /* Ảnh to lên nhẹ nhàng */
-}
-
-.art-img img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.6s ease;
-}
-
-/* Badge "Nổi bật" hoặc "Mới" như web doanh nghiệp */
-.art-tag.hot {
-    background: linear-gradient(45deg, #ff4757, #ff6b81);
-    box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
-}
-
-/* Nút bấm Đọc tiếp - Phong cách Sapo/Shopify */
-.view-btn {
-    margin-top: auto; /* Đẩy nút xuống đáy thẻ */
-    background: transparent;
-    border: 2px solid #72C1D9;
-    color: #72C1D9;
-    padding: 10px;
-    border-radius: 8px;
-    font-weight: 700;
-    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.08);
+    overflow: hidden;
+    padding: 20px; /* Tạo khoảng cách đều xung quanh */
+    gap: 25px;    /* Khoảng cách giữa ảnh và chữ */
     transition: 0.3s;
 }
 
-.view-btn:hover {
-    background: #72C1D9;
-    color: white;
-    box-shadow: 0 5px 15px rgba(114, 193, 217, 0.4);
-}
-
-/* Thẻ bài viết kiểu thẻ sản phẩm */
-.art-card {
-    background: #fff;
-    border-radius: 15px;
-    border: 1px solid #f0f0f0;
-    overflow: hidden;
-    transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-}
-
 .art-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    border-color: #72C1D9; /* Màu xanh banner của bro */
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
 }
 
-/* Ảnh tác phẩm */
+/* --- HÌNH ẢNH --- */
 .art-img {
-    position: relative;
-    height: 180px;
-    background: #eee;
+    flex: 1;      /* Chiếm 1 phần diện tích */
+    width: 100%;
+    border-radius: 12px; /* Bo góc riêng cho ảnh */
+    overflow: hidden;
 }
 
 .art-img img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
 }
 
-/* Nhãn tag (Thơ/Họa) */
 .art-tag {
     position: absolute;
-    top: 10px;
-    left: 10px;
+    top: 12px;
+    left: 12px;
     background: rgba(114, 193, 217, 0.9);
     color: white;
-    padding: 2px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: bold;
+    z-index: 2;
+    backdrop-filter: blur(4px);
 }
 
-/* Thông tin chi tiết */
+/* --- 4. NỘI DUNG THÔNG TIN (INFO) --- */
+/* --- PHẦN THÔNG TIN BÊN PHẢI --- */
 .art-info {
-    padding: 15px;
-    text-align: center;
+    flex: 1.2;    /* Chiếm phần diện tích lớn hơn một chút để chứa chữ */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 0;   /* Đã có padding ở thẻ cha .art-card */
 }
 
-.art-info h4 {
-    margin: 0 0 5px;
-    color: #333;
-    font-size: 18px;
+/* Reset danh sách cho sạch sẽ */
+.art-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.art-info li {
+    margin-bottom: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 .art-info .author {
     font-size: 13px;
-    color: #888;
-    margin-bottom: 10px;
-    font-style: italic;
+    color: #999;
+    margin: 0;
 }
 
-/* Giả lập giá tiền cho vui */
 .art-price {
+    font-size: 16px;
     color: #ff4757;
     font-weight: bold;
-    font-size: 16px;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
 }
 
-/* Nút bấm kiểu Web doanh nghiệp */
+/* --- 5. NÚT BẤM (VIEW BUTTON) --- */
 .view-btn {
+    margin-top: auto; /* QUAN TRỌNG: Đẩy nút luôn nằm sát đáy card */
     width: 100%;
-    padding: 8px 0;
-    background: #fff;
-    border: 1px solid #2ecc71; /* Màu xanh lá như ảnh bro gửi */
+    padding: 12px;
+    border: 2px solid #2ecc71;
     color: #2ecc71;
-    border-radius: 5px;
-    cursor: pointer;
+    background: transparent;
+    border-radius: 8px;
     font-weight: bold;
+    cursor: pointer;
     transition: 0.3s;
 }
 
 .view-btn:hover {
     background: #2ecc71;
-    color: #fff;
+    color: white;
 }
 
+/* --- 6. PHẢN HỒI (RESPONSIVE) --- */
+@media (max-width: 1024px) {
+    .art-grid { 
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 768px) {
+    .layout { 
+        flex-direction: column; 
+    }
+    .art-grid { 
+        grid-template-columns: 1fr; 
+    }
+    .sidebar { 
+        width: 100%; 
+        min-width: unset; 
+    }
+}
 #binh-luan textarea:focus {
     border-color: #72C1D9;
     box-shadow: 0 0 10px rgba(114, 193, 217, 0.2);
