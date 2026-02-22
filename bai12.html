@@ -114,8 +114,9 @@
         </div>
 
         <!-- CỘT PHẢI -->
-        <script src="js/sidebar.js"></script>
-        <aside class="sidebar">
+        
+        <aside class="sidebar" id="sidebar">
+        <script src="sidebar/sidebar.js"></script>   
             <h4>📌 Thông tin </h4>
             <ul>
                 <li>🏫 Lớp: 12A4</li>
@@ -129,9 +130,15 @@
         </aside>
 
     </div>
+
+    <script src="profile.js"></script>
     <section id="members-section">
     <h2 class="section-title">Thành Viên Tổ 1</h2>
 
+    <div class="slider-controls">
+    <button id="prevBtn">◀</button>
+    <button id="nextBtn">▶</button>
+    </div>
     <div class="member-slider">
 
         <!-- HÀNG 1 -->

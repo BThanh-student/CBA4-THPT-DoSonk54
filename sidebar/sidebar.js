@@ -24,3 +24,4 @@ document.addEventListener("DOMContentLoaded", function () {
 
     sidebar.innerHTML = html;
 });
+
