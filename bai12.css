@@ -362,6 +362,48 @@ article, section {
     overflow: hidden;
     border: 3px solid #ff4b2b;
 }
+.member-img-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    
+    /* FIX CHÍNH Ở ĐÂY: */
+    padding: 0;             /* Xóa padding để ảnh khít viền */
+    overflow: hidden;       /* Cắt phần ảnh thừa */
+    isolation: isolate;     /* Giúp Safari bo góc chuẩn hơn */
+    display: block;         /* Khử khoảng hở văn bản */
+    
+    border: 3px solid #ff4b2b;
+    margin: 0 auto 15px;
+    transition: all 0.4s ease;
+}
+.member-img-wrapper {
+    transition: all 0.4s ease;
+    border: 3px solid #ff4b2b; /* Màu cam đỏ cho năng động */
+    padding: 3px; /* Tạo một khoảng trắng nhỏ giữa viền và ảnh */
+}
+.member-img-wrapper {
+    transition: all 0.4s ease;
+    border: 3px solid #ff4b2b; /* Màu cam đỏ cho năng động */
+    padding: 3px; /* Tạo một khoảng trắng nhỏ giữa viền và ảnh */
+}
+.member-img-wrapper {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    
+    /* FIX CHÍNH Ở ĐÂY: */
+    padding: 0;             /* Xóa padding để ảnh khít viền */
+    overflow: hidden;       /* Cắt phần ảnh thừa */
+    isolation: isolate;     /* Giúp Safari bo góc chuẩn hơn */
+    display: block;         /* Khử khoảng hở văn bản */
+    
+    border: 3px solid #ff4b2b;
+    margin: 0 auto 15px;
+    transition: all 0.4s ease;
+}
 
 .member-img-wrapper img {
     width: 100%;
@@ -391,12 +433,6 @@ article, section {
     margin: 0 auto;
 }
 
-.member-img-wrapper {
-    transition: all 0.4s ease;
-    border: 3px solid #ff4b2b; /* Màu cam đỏ cho năng động */
-    padding: 3px; /* Tạo một khoảng trắng nhỏ giữa viền và ảnh */
-}
-
 .member-card:hover .member-img-wrapper {
     border-color: #0056b3; /* Đổi màu viền khi di chuột vào card */
     transform: scale(1.1) rotate(5deg); /* Phóng to nhẹ và hơi xoay cho ngầu */
@@ -409,22 +445,6 @@ article, section {
     z-index: 5; /* Đảm bảo nó nằm trên các lớp nền */
 }
 
-.member-img-wrapper {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    
-    /* FIX CHÍNH Ở ĐÂY: */
-    padding: 0;             /* Xóa padding để ảnh khít viền */
-    overflow: hidden;       /* Cắt phần ảnh thừa */
-    isolation: isolate;     /* Giúp Safari bo góc chuẩn hơn */
-    display: block;         /* Khử khoảng hở văn bản */
-    
-    border: 3px solid #ff4b2b;
-    margin: 0 auto 15px;
-    transition: all 0.4s ease;
-}
 .member-slider {
     display: flex;
     gap: 20px;
@@ -590,149 +610,89 @@ article, section {
     from { opacity: 0; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1); }
 }
-/* Tổng thể khung Lời ngỏ */
-#gioi-thieu {
-    background: #ffffff;
-    border-radius: 15px; /* Bo góc cho mềm mại */
+/* 1. Khung chung cho cả 3 box - Đã đồng bộ Mesh Gradient */
+.content-box {
+    background: radial-gradient(at 0% 0%, rgba(114, 193, 217, 0.1) 0, transparent 50%), 
+                radial-gradient(at 100% 100%, rgba(255, 71, 87, 0.08) 0, transparent 50%),
+                #ffffff;
+    border-radius: 20px;
     padding: 30px;
-    margin: 20px 0;
+    margin-bottom: 30px;
     position: relative;
-    border-left: 8px solid #ff4757; /* Tạo điểm nhấn viền trái màu đỏ nhiệt huyết */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi di chuột */
-
+    overflow: hidden; /* Cắt phần viền thừa để giữ bo góc */
+    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: none; /* Xóa bỏ border cũ gây lỗi bo góc */
 }
 
-/* Hiệu ứng khi di chuột qua box */
-#gioi-thieu:hover {
-    transform: translateY(-5px); /* Bay nhẹ lên trên */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    border-left-color: #2e86de; /* Đổi màu viền khi hover cho vui mắt */
+/* 2. Tạo dải màu gradient ở viền trái (Thay cho border-image bị lỗi) */
+.content-box::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 8px;
+    height: 100%;
+    background: linear-gradient(to bottom, #72C1D9, #ff4757);
+    z-index: 5;
 }
 
-/* Trang trí tiêu đề "Lời ngỏ" */
-#gioi-thieu h3 {
+/* 3. Hiệu ứng Hover trượt ngang đồng bộ */
+.content-box:hover {
+    transform: translateX(10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+/* 4. Tiêu đề H3 đồng bộ */
+.content-box h3 {
     color: #2f3542;
-    font-size: 24px;
+    font-size: 22px;
+    margin-top: 0;
     margin-bottom: 15px;
     display: flex;
     align-items: center;
+    font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
-/* Thêm một cái icon nhỏ trước chữ Lời ngỏ (dùng pseudo-element) */
-#gioi-thieu h3::before {
-    content: '✍️'; /* Icon bút viết */
-    margin-right: 10px;
-    font-size: 28px;
-}
+/* Thêm icon tự động cho từng ID */
+#gioi-thieu h3::after { content: ' ✍️'; margin-left: 10px; }
+#bai-viet h3::after { content: ' 📖'; margin-left: 10px; }
+#binh-luan h3::after { content: ' 💬'; margin-left: 10px; }
 
-/* Nội dung bên trong */
-#bai-viet p {
+/* 5. Nội dung văn bản */
+.content-box p {
     color: #57606f;
     line-height: 1.8;
     font-size: 16px;
-    font-style: italic; /* Lời ngỏ để nghiêng cho tình cảm */
+    margin: 0;
 }
 
-/* Tổng thể khung Bài */
-#bai-viet {
-    background: #ffffff;
-    border-radius: 15px; /* Bo góc cho mềm mại */
-    padding: 30px;
-    margin: 20px 0;
-    position: relative;
-    border-left: 8px solid #ff4757; /* Tạo điểm nhấn viền trái màu đỏ nhiệt huyết */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi di chuột */
+/* 6. Riêng cho phần Bình luận để không bị tràn */
+#binh-luan textarea {
+    width: 100%;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 10px;
+    outline: none;
+    transition: 0.3s;
 }
 
-/* Hiệu ứng khi di chuột qua box */
-#bai-viet:hover {
-    transform: translateY(-5px); /* Bay nhẹ lên trên */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    border-left-color: #2e86de; /* Đổi màu viền khi hover cho vui mắt */
+#binh-luan textarea:focus {
+    border-color: #72C1D9;
+    box-shadow: 0 0 10px rgba(114, 193, 217, 0.2);
 }
 
-/* Trang trí tiêu đề "Bài viết" */
-#bai-viet h3 {
-    color: #2f3542;
-    font-size: 24px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-
-}
-
-/* Thêm một cái icon nhỏ trước chữ Bài viết (dùng pseudo-element) */
-#bai-viet h3::before {
-    content: '✍️'; /* Icon bút viết */
-    margin-right: 10px;
-    font-size: 28px;
-}
-
-/* Nội dung bên trong */
-#bai-viet p {
-    color: #57606f;
-    line-height: 1.8;
-    font-size: 16px;
-    font-style: italic; /* Bài viết để nghiêng cho tình cảm */
-}
-
-/* Nội dung bên trong */
-#binh-luan p {
-    color: #57606f;
-    line-height: 1.8;
-    font-size: 16px;
-    font-style: italic; /* Bình luận để nghiêng cho tình cảm */
-}
-
-/* Tổng thể khung Bình luận */
-#binh-luan {
-    background: #ffffff;
-    border-radius: 15px; /* Bo góc cho mềm mại */
-    padding: 30px;
-    margin: 20px 0;
-    position: relative;
-    border-left: 8px solid #ff4757; /* Tạo điểm nhấn viền trái màu đỏ nhiệt huyết */
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Đổ bóng nhẹ cho sang */
-    transition: all 0.3s ease; /* Hiệu ứng mượt mà khi di chuột */
-}
-
-/* Hiệu ứng khi di chuột qua box */
-#binh-luan:hover {
-    transform: translateY(-5px); /* Bay nhẹ lên trên */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
-    border-left-color: #2e86de; /* Đổi màu viền khi hover cho vui mắt */
-}
-
-/* Trang trí tiêu đề "Bình luận" */
-#binh-luan h3 {
-    color: #2f3542;
-    font-size: 24px;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-/* Thêm một cái icon nhỏ trước chữ Bình luận (dùng pseudo-element) */
-#binh-luan h3::before {
-    content: '✍️'; /* Icon bút viết */
-    margin-right: 10px;
-    font-size: 28px;
-}
-
-/* Nội dung bên trong */
-#binh-luan p {
-    color: #57606f;
-    line-height: 1.8;
-    font-size: 16px;
-    font-style: italic; /* Bình luận để nghiêng cho tình cảm */
+#binh-luan button {
+    margin-top: 10px;
+    background: #A52A2A;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
 }
 
 footer {
