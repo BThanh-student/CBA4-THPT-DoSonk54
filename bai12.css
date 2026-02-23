@@ -710,6 +710,7 @@ article, section {
     width: 100%;
     border-radius: 12px; /* Bo góc riêng cho ảnh */
     overflow: hidden;
+    position: relative; /* Chuẩn bị cho tag nằm trên ảnh */
 }
 
 .art-img img {
