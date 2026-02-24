@@ -34,6 +34,14 @@ const products = {
     tan: {
         img: "anh1/Tân.jpg",
         desc: "Tri thức là sức mạnh. Không bán nhưng vẫn đáng xem."
+    },
+    bao: {
+        img: "anh1/Bao.jpg",
+        desc: "Một người bạn tuyệt vời trong lớp. Cực kỳ đáng yêu."
+    },
+    ha: {
+        img: "anh1/Ha.jpg",
+        desc: "Một cô gái tuyệt vời trong lớp. Cực kỳ đáng yêu và là thợ săn tình cảm."
     }
 };
 
