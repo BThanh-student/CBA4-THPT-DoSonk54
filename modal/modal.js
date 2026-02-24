@@ -21,7 +21,7 @@ const products = {
     },
     thanh: {
         img: "anh1/Thanh.jpg",
-        desc: "Một nhân vật đặc biệt của Tổ 1. Nhẹ nhàng nhưng nguy hiểm và sự vô đạo bất lương."
+        desc: "Một nhân vật đặc biệt của Tổ 3. Nhẹ nhàng nhưng nguy hiểm và sự vô đạo bất lương."
     },
     cute: {
         img: "anh1/Cute.jpg",
