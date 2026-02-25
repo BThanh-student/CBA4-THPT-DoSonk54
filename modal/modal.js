@@ -3,62 +3,33 @@ const modalBody = document.getElementById("modal-body");
 const closeBtn = document.querySelector(".close-btn");
 
 const products = {
-    anime: {
-        img: "anh1/anime.jpg",
-        desc: "Thế giới anime Nhật Bản đầy màu sắc, cảm xúc và những câu chuyện vượt thời gian."
-    },
-    hoavuon: {
-        img: "anh1/Hoa.jpg",
-        desc: "Khu vườn hoa nghệ thuật với sắc màu dịu nhẹ và cảm giác yên bình."
-    },
-    hoavuon2: {
-        img: "anh1/Hoa2.jpg",
-        desc: "Phiên bản hoa nâng cấp, đậm chất thơ và chiều sâu."
-    },
-    duyen: {
-        img: "anh1/Duyen.jpg",
-        desc: "Một nét đẹp dịu dàng, duyên dáng tốt bụng nhưng đầy khí chất riêng."
-    },
-    thanh: {
-        img: "anh1/Thanh.jpg",
-        desc: "Một nhân vật đặc biệt của Tổ 3. Nhẹ nhàng nhưng nguy hiểm và sự vô đạo bất lương."
-    },
-    cute: {
-        img: "anh1/Cute.jpg",
-        desc: "Meomeo siêu cấp đáng yêu. Nhìn một lần là muốn nuôi liền."
-    },
-    minhnam: {
-        img: "anh1/MinhNam.jpg",
-        desc: "Visual chuẩn chỉnh. Nhưng tiếc là đã có chủ."
-    },
-    tan: {
-        img: "anh1/Tân.jpg",
-        desc: "Tri thức là sức mạnh. Không bán nhưng vẫn đáng xem."
-    },
-    bao: {
-        img: "anh1/Bao.jpg",
-        desc: "Một người bạn tuyệt vời trong lớp. Cực kỳ đáng yêu."
-    },
-    ha: {
-        img: "anh1/Ha.jpg",
-        desc: "Một cô gái tuyệt vời trong lớp. Cực kỳ đáng yêu và là thợ săn tình cảm."
-    },
-    thu: {
-        img: "anh1/Thư.jpg",
-        desc: "Một cô gái tuyệt vời trong lớp. Bạn thân Hà và Duyên, yêu cái đẹp và yêu tình yêu thuần khiết"
-    },
-    viet: {
-        img: "anh1/Việt.jpg",
-        desc: "Cây hài của lớp, nhiều tài lẻ hay cười hay trêu bạn bè và đặc biệt là .... là một người bạn tuyệt vời =))"
-    }
+    anime: { img: "anh1/anime.jpg", desc: "Thế giới anime Nhật Bản đầy màu sắc, cảm xúc và những câu chuyện vượt thời gian." },
+    hoavuon: { img: "anh1/Hoa.jpg", desc: "Khu vườn hoa nghệ thuật với sắc màu dịu nhẹ và cảm giác yên bình." },
+    hoavuon2: { img: "anh1/Hoa2.jpg", desc: "Phiên bản hoa nâng cấp, đậm chất thơ và chiều sâu." },
+    duyen: { img: "anh1/Duyen.jpg", desc: "Một nét đẹp dịu dàng, duyên dáng tốt bụng nhưng đầy khí chất riêng." },
+    thanh: { img: "anh1/Thanh.jpg", desc: "Một nhân vật đặc biệt của Tổ 3. Nhẹ nhàng nhưng nguy hiểm và sự vô đạo bất lương." },
+    cute: { img: "anh1/Cute.jpg", desc: "Meomeo siêu cấp đáng yêu. Nhìn một lần là muốn nuôi liền." },
+    minhnam: { img: "anh1/MinhNam.jpg", desc: "Visual chuẩn chỉnh. Nhưng tiếc là đã có chủ." },
+    tan: { img: "anh1/Tân.jpg", desc: "Tri thức là sức mạnh. Không bán nhưng vẫn đáng xem." },
+    bao: { img: "anh1/Bao.jpg", desc: "Một người bạn tuyệt vời trong lớp. Cực kỳ đáng yêu." },
+    ha: { img: "anh1/Ha.jpg", desc: "Một cô gái tuyệt vời trong lớp. Cực kỳ đáng yêu và là thợ săn tình cảm." },
+    thu: { img: "anh1/Thư.jpg", desc: "Một cô gái tuyệt vời trong lớp. Bạn thân Hà và Duyên, yêu cái đẹp và yêu tình yêu thuần khiết" },
+    viet: { img: "anh1/Việt.jpg", desc: "Cây hài của lớp, nhiều tài lẻ hay cười hay trêu bạn bè và đặc biệt là .... là một người bạn tuyệt vời =))" }
 };
+
+// --- LOGIC PHÁT NHẠC TỪ IFRAME ---
+function playMusic() {
+    const musicFrame = document.getElementById("muvi-frame");
+    if (musicFrame && musicFrame.src.includes("start=false")) {
+        // Đổi start=false thành start=true để nhạc bắt đầu chạy khi người dùng click
+        musicFrame.src = musicFrame.src.replace("start=false", "start=true");
+    }
+}
 
 document.querySelectorAll(".view-btn").forEach(button => {
     button.addEventListener("click", () => {
-
         const id = button.getAttribute("data-id");
         const product = products[id];
-
         const card = button.closest(".art-card");
 
         const title = card.querySelector("h4").innerText;
@@ -74,6 +45,9 @@ document.querySelectorAll(".view-btn").forEach(button => {
         `;
 
         modal.style.display = "block";
+
+        // Kích hoạt nhạc khi người dùng click xem chi tiết
+        playMusic();
     });
 });
 
@@ -86,4 +60,3 @@ window.onclick = (e) => {
         modal.style.display = "none";
     }
 };
-
