@@ -42,6 +42,14 @@ const products = {
     ha: {
         img: "anh1/Ha.jpg",
         desc: "Một cô gái tuyệt vời trong lớp. Cực kỳ đáng yêu và là thợ săn tình cảm."
+    },
+    thu: {
+        img: "anh1/Thư.jpg",
+        desc: "Một cô gái tuyệt vời trong lớp. Bạn thân Hà và Duyên, yêu cái đẹp và yêu tình yêu thuần khiết"
+    },
+    viet: {
+        img: "anh1/Việt.jpg",
+        desc: "Cây hài của lớp, nhiều tài lẻ hay cười hay trêu bạn bè và đặc biệt là .... là một người bạn tuyệt vời =))"
     }
 };
 
