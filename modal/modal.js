@@ -1,62 +1,140 @@
-const modal = document.getElementById("productModal");
-const modalBody = document.getElementById("modal-body");
-const closeBtn = document.querySelector(".close-btn");
+document.addEventListener("DOMContentLoaded", () => {
 
-const products = {
-    anime: { img: "anh1/anime.jpg", desc: "Thế giới anime Nhật Bản đầy màu sắc, cảm xúc và những câu chuyện vượt thời gian." },
-    hoavuon: { img: "anh1/Hoa.jpg", desc: "Khu vườn hoa nghệ thuật với sắc màu dịu nhẹ và cảm giác yên bình." },
-    hoavuon2: { img: "anh1/Hoa2.jpg", desc: "Phiên bản hoa nâng cấp, đậm chất thơ và chiều sâu." },
-    duyen: { img: "anh1/Duyen.jpg", desc: "Một nét đẹp dịu dàng, duyên dáng tốt bụng nhưng đầy khí chất riêng." },
-    thanh: { img: "anh1/Thanh.jpg", desc: "Một nhân vật đặc biệt của Tổ 3. Nhẹ nhàng nhưng nguy hiểm và sự vô đạo bất lương." },
-    cute: { img: "anh1/Cute.jpg", desc: "Meomeo siêu cấp đáng yêu. Nhìn một lần là muốn nuôi liền." },
-    minhnam: { img: "anh1/MinhNam.jpg", desc: "Visual chuẩn chỉnh. Nhưng tiếc là đã có chủ." },
-    tan: { img: "anh1/Tân.jpg", desc: "Tri thức là sức mạnh. Không bán nhưng vẫn đáng xem." },
-    bao: { img: "anh1/Bao.jpg", desc: "Một người bạn tuyệt vời trong lớp. Cực kỳ đáng yêu." },
-    ha: { img: "anh1/Ha.jpg", desc: "Một cô gái tuyệt vời trong lớp. Cực kỳ đáng yêu và là thợ săn tình cảm." },
-    thu: { img: "anh1/Thư.jpg", desc: "Một cô gái tuyệt vời trong lớp. Bạn thân Hà và Duyên, yêu cái đẹp và yêu tình yêu thuần khiết" },
-    viet: { img: "anh1/Việt.jpg", desc: "Cây hài của lớp, nhiều tài lẻ hay cười hay trêu bạn bè và đặc biệt là .... là một người bạn tuyệt vời =))" }
-};
+    // ==============================
+    // LẤY ELEMENT
+    // ==============================
+    const iframe = document.getElementById("yt-player");
+    const playBtn = document.getElementById("play");
+    const nextBtn = document.getElementById("next");
+    const prevBtn = document.getElementById("prev");
 
-// --- LOGIC PHÁT NHẠC TỪ IFRAME ---
-function playMusic() {
-    const musicFrame = document.getElementById("muvi-frame");
-    if (musicFrame && musicFrame.src.includes("start=false")) {
-        // Đổi start=false thành start=true để nhạc bắt đầu chạy khi người dùng click
-        musicFrame.src = musicFrame.src.replace("start=false", "start=true");
+    const modal = document.getElementById("productModal");
+    const modalBody = document.getElementById("modal-body");
+    const closeBtn = document.querySelector(".close-btn");
+
+    // ==============================
+    // PLAYLIST
+    // ==============================
+    const playlist = ["ZLWUjPdAJb4", "-XxZTgMWKV0", "SnpKIuFaTPE"];
+    let currentIndex = 0;
+    let isPlaying = false;
+
+    // ==============================
+    // LOAD VIDEO
+    // ==============================
+    function loadSong(index) {
+        if (!iframe) return;
+
+        const videoId = playlist[index];
+        const listString = playlist.join(",");
+
+        iframe.src =
+            `https://www.youtube.com/embed/${videoId}?autoplay=1&playlist=${listString}&loop=1&rel=0`;
+
+        isPlaying = true;
     }
-}
 
-document.querySelectorAll(".view-btn").forEach(button => {
-    button.addEventListener("click", () => {
-        const id = button.getAttribute("data-id");
-        const product = products[id];
-        const card = button.closest(".art-card");
+    // ==============================
+    // PLAY / PAUSE
+    // ==============================
+    if (playBtn) {
+        playBtn.addEventListener("click", () => {
 
-        const title = card.querySelector("h4").innerText;
-        const author = card.querySelector(".author").innerText;
-        const price = card.querySelector(".art-price").innerText;
+            if (!isPlaying) {
+                loadSong(currentIndex);
+            } else {
+                iframe.src = "";
+                isPlaying = false;
+            }
 
-        modalBody.innerHTML = `
-            <img src="${product.img}">
-            <h2>${title}</h2>
-            <p>${author}</p>
-            <p><strong>${price}</strong></p>
-            <p>${product.desc}</p>
-        `;
+        });
+    }
 
-        modal.style.display = "block";
+    // ==============================
+    // NEXT
+    // ==============================
+    if (nextBtn) {
+        nextBtn.addEventListener("click", () => {
+            currentIndex = (currentIndex + 1) % playlist.length;
+            loadSong(currentIndex);
+        });
+    }
 
-        // Kích hoạt nhạc khi người dùng click xem chi tiết
-        playMusic();
+    // ==============================
+    // PREVIOUS
+    // ==============================
+    if (prevBtn) {
+        prevBtn.addEventListener("click", () => {
+            currentIndex =
+                (currentIndex - 1 + playlist.length) % playlist.length;
+            loadSong(currentIndex);
+        });
+    }
+
+    // ==============================
+    // DATA SẢN PHẨM
+    // ==============================
+    const products = {
+        anime: { img: "anh1/anime.jpg", desc: "Thế giới anime Nhật Bản đầy màu sắc..." },
+        hoavuon: { img: "anh1/Hoa.jpg", desc: "Khu vườn hoa nghệ thuật..." },
+        hoavuon2: { img: "anh1/Hoa2.jpg", desc: "Phiên bản hoa nâng cấp..." },
+        duyen: { img: "anh1/Duyen.jpg", desc: "Một nét đẹp dịu dàng, duyên dáng" },
+        thanh: { img: "anh1/Thanh.jpg", desc: "Nhẹ nhàng nhưng nguy hiểm và quá vô đạo bất lương" },
+        cute: { img: "anh1/Cute.jpg", desc: "Meomeo siêu cấp đáng yêu, nhìn là muốn nhận nuôi rồi( Ngọc Khánh sad)..." },
+        minhnam: { img: "anh1/MinhNam.jpg", desc: "Visual chuẩn chỉnh, hệ điều hành đẹp trai nhưng tiếc là hoa đã có chủ..." },
+        tan: { img: "anh1/Tân.jpg", desc: "Tri thức là sức mạnh, boy anime..." },
+        bao: { img: "anh1/Bao.jpg", desc: "Một người bạn tuyệt vời, sai đẹp chiêu và hài hước..." },
+        ha: { img: "anh1/Ha.jpg", desc: "Thợ săn tình cảm hoang dại..." },
+        thu: { img: "anh1/Thư.jpg", desc: "Yêu cái đẹp đến điên dại..." },
+        viet: { img: "anh1/Việt.jpg", desc: "Cây hài của lớp và say mê..." }
+    };
+
+    // ==============================
+    // MODAL
+    // ==============================
+    document.querySelectorAll(".view-btn").forEach(button => {
+        button.addEventListener("click", () => {
+
+            const id = button.getAttribute("data-id");
+            const product = products[id];
+            if (!product) return;
+
+            const card = button.closest(".art-card");
+
+            const title =
+                card?.querySelector("h4")?.innerText || "Sản phẩm";
+
+            const author =
+                card?.querySelector(".author")?.innerText || "N/A";
+
+            const price =
+                card?.querySelector(".art-price")?.innerText || "Liên hệ";
+
+            modalBody.innerHTML = `
+                <img src="${product.img}"
+                     alt="${title}"
+                     style="width:100%; border-radius:10px;">
+                <h2>${title}</h2>
+                <p><strong>Tác giả:</strong> ${author}</p>
+                <p><strong>Giá:</strong>
+                   <span style="color:red">${price}</span></p>
+                <p>${product.desc}</p>
+            `;
+
+            if (modal) modal.style.display = "block";
+        });
     });
-});
 
-closeBtn.onclick = () => {
-    modal.style.display = "none";
-};
-
-window.onclick = (e) => {
-    if (e.target === modal) {
-        modal.style.display = "none";
+    if (closeBtn) {
+        closeBtn.onclick = () => {
+            if (modal) modal.style.display = "none";
+        };
     }
-};
+
+    window.onclick = (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+
+});

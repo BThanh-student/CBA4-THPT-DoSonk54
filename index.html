@@ -233,7 +233,7 @@
             <div class="art-info">
                 <h4>Hà</h4>
                 <p class="author">By: Unknow</p>
-                <div class="art-price">Không bán</div>
+                <div class="art-price">Không bán mà cũng sắp có chủ</div>
                 <button class="view-btn" data-id="ha">Xem chi tiết</button>
             </div>
         </div>
@@ -246,7 +246,7 @@
             <div class="art-info">
                 <h4>Thư</h4>
                 <p class="author">By: Gia Việt</p>
-                <div class="art-price">Không bán</div>
+                <div class="art-price">Sắp có chủ</div>
                 <button class="view-btn" data-id="thu">Xem chi tiết</button>
             </div>
         </div>
@@ -254,12 +254,12 @@
         <div class="art-card">
             <div class="art-img">
                 <img src="anh1/Việt.jpg" alt="Thợ săn">
-                <span class="art-tag">Thợ săn tc</span>
+                <span class="art-tag">Hunter</span>
             </div>
             <div class="art-info">
                 <h4>Việt</h4>
                 <p class="author">By: Thư</p>
-                <div class="art-price">Không bán</div>
+                <div class="art-price">Sắp có chủ</div>
                 <button class="view-btn" data-id="viet">Xem chi tiết</button>
             </div>
         </div>
@@ -700,14 +700,24 @@
             </div>
     </div>
 </div>
-<script src="modal/modal.js"></script>
 
 <div id="music-player">
-    <iframe 
-        src="https://www.youtube.com/embed/-XxZTgMWKV0?autoplay=1&loop=1&playlist=ZLWUjPdAJb4"
-        allow="autoplay"
-        frameborder="0">
-    </iframe>
+   <iframe
+    id="yt-player"
+    width="300"
+    height="170"
+    src=""
+    allow="autoplay"
+    frameborder="0">
+</iframe>
+
+    <div class="controls">
+        <button id="prev">Previous</button>
+        <button id="play">Play/Pause</button>
+        <button id="next">Next</button>
+    </div>
 </div>
+
+<script src="modal/modal.js"></script>
 </body>
 </html>
