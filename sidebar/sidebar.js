@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
             "📅 Niên khóa: 2023-2026",
             "❤️ Chủ đề: Hồi ức thanh xuân"
         ],
-        image: "anh1/12A4.jpg"
+        image: "anh1/Kỷ yếu.JPG"
     };
 
     let html = `
